@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spottr | Your AI-Powered Workout Partner & Gym Community</title>
+  <meta name="description" content="1,000+ exercise library with video demos, AI fitness coach, gym partner discovery, and offline workout generator. 100% free forever.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Logo.png">
+  <link rel="apple-touch-icon" href="Logo.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Spottr | AI Fitness Coach & Workout Partner">
+  <meta property="og:description" content="1,000+ workouts with video demos, AI coach, gym partner matching, and zero paywalls. Download the free Android APK.">
+  <meta property="og:image" content="Logo.png">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #09090b;
+      --card: #141419;
+      --card-hover: #1c1c24;
+      --border: #272732;
+      --border-hover: #3e3e50;
+      --primary: #B497FF;
+      --primary-hover: #9b78f8;
+      --primary-dark: #6e46e6;
+      --primary-glow: rgba(180, 151, 255, 0.25);
+      --accent: #00E5FF;
+      --text: #ffffff;
+      --text-muted: #8e8ea0;
+      --text-sub: #b8b8cc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Background glow decorations */
+    .glow-circle-1 {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(180, 151, 255, 0.18) 0%, rgba(9, 9, 11, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-circle-2 {
+      position: absolute;
+      top: 60%;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(9, 9, 11, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      object-fit: cover;
+    }
+
+    .brand-text {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(180, 151, 255, 0.12);
+      color: var(--primary);
+      border: 1px solid rgba(180, 151, 255, 0.3);
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 0 50px;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(180, 151, 255, 0.1);
+      border: 1px solid rgba(180, 151, 255, 0.25);
+      color: var(--primary);
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .badge i {
+      font-size: 11px;
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #ffffff 30%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-sub);
+      line-height: 1.6;
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+
+    /* Download Action */
+    .download-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--primary);
+      color: #0a0a0f;
+      padding: 18px 38px;
+      border-radius: 99px;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 30px var(--primary-glow);
+      transition: all 0.25s ease;
+    }
+
+    .btn-download:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(180, 151, 255, 0.4);
+    }
+
+    .btn-download i {
+      font-size: 22px;
+    }
+
+    .download-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .download-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Bento Grid */
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 48px;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+
+    .bento-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-card:hover {
+      border-color: var(--border-hover);
+      background: var(--card-hover);
+      transform: translateY(-3px);
+    }
+
+    .card-large {
+      grid-column: span 2;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+      background: rgba(180, 151, 255, 0.12);
+      color: var(--primary);
+      border: 1px solid rgba(180, 151, 255, 0.2);
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-item h3 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat-item p {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* Steps Section */
+    .steps-section {
+      background: linear-gradient(180deg, rgba(20, 20, 25, 0.5) 0%, rgba(9, 9, 11, 0.8) 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 50px 40px;
+      margin-bottom: 80px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(180, 151, 255, 0.15);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(180, 151, 255, 0.3);
+    }
+
+    .step-item h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step-item p {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+      text-align: center;
+      padding: 70px 30px;
+      background: radial-gradient(circle at center, rgba(180, 151, 255, 0.15) 0%, rgba(20, 20, 25, 0.8) 80%);
+      border: 1px solid rgba(180, 151, 255, 0.3);
+      border-radius: 28px;
+      margin-bottom: 80px;
+    }
+
+    .cta-banner h2 {
+      font-size: 38px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .cta-banner p {
+      font-size: 16px;
+      color: var(--text-sub);
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      h1 { font-size: 40px; }
+      .bento-grid { grid-template-columns: 1fr; }
+      .card-large { grid-column: span 1; }
+      .steps-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero { padding: 50px 0 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-circle-1"></div>
+  <div class="glow-circle-2"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="#" class="brand">
+        <img src="Logo.png" alt="Spottr Logo">
+        <span class="brand-text">Spottr</span>
+      </a>
+      <a href="spottr.apk" download="spottr.apk" class="nav-btn">
+        <i class="fa-solid fa-download"></i> Get APK
+      </a>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="badge">
+        <i class="fa-solid fa-bolt"></i> 100% Free • Standalone Release v1.0.1
+      </div>
+      <h1>
+        Train Smarter.<br>
+        Find Your Spotter.<br>
+        <span>Reach Your Peak.</span>
+      </h1>
+      <p class="hero-sub">
+        Spottr is your all-in-one athletic companion. Featuring over 1,000 exercises with video demos, an adaptive AI fitness coach, local workout generators, and workout partner matching — zero paywalls, zero subscriptions.
+      </p>
+
+      <div class="download-action">
+        <a href="spottr.apk" download="spottr.apk" class="btn-download" id="downloadMainBtn">
+          <i class="fa-brands fa-android"></i> Download APK (v1.0.1)
+        </a>
+        <div class="download-meta">
+          <span><i class="fa-solid fa-file-zipper"></i> 41.5 MB</span>
+          <span>•</span>
+          <span><i class="fa-solid fa-shield-halved"></i> Verified Clean & Safe</span>
+          <span>•</span>
+          <span><i class="fa-solid fa-lock-open"></i> 100% Free Forever</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Grid Features -->
+    <section>
+      <h2 class="section-title">Built for Real Athletes</h2>
+      <p class="section-sub">Everything you need to level up your strength and conditioning</p>
+
+      <div class="bento-grid">
+        <!-- Card 1 (Large) -->
+        <div class="bento-card card-large">
+          <div>
+            <div class="card-icon"><i class="fa-solid fa-dumbbell"></i></div>
+            <h3 class="card-title">1,000+ Exercise Library</h3>
+            <p class="card-desc">
+              Extensive workout database categorized by muscle groups (Chest, Back, Arms, Legs, Shoulders, Core). Each exercise includes detailed step-by-step instructions, equipment needs, and direct HD video demonstrations.
+            </p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-item">
+              <h3>1,128</h3>
+              <p>Video Demos</p>
+            </div>
+            <div class="stat-item">
+              <h3>100%</h3>
+              <p>Offline Ready</p>
+            </div>
+            <div class="stat-item">
+              <h3>0$</h3>
+              <p>Completely Free</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bento-card">
+          <div>
+            <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
+            <h3 class="card-title">Gym Bot (AI Coach)</h3>
+            <p class="card-desc">
+              Your 24/7 personal fitness coach. Ask about form correction, substitute exercises on the fly, and receive custom nutrition advice backed by facts.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bento-card">
+          <div>
+            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+            <h3 class="card-title">Find Workout Partners</h3>
+            <p class="card-desc">
+              Never lift alone. Discover and connect with workout partners based on your gym location, goals, and training schedule with our swipe matching.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 4 (Large) -->
+        <div class="bento-card card-large">
+          <div>
+            <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <h3 class="card-title">Smart Routine Generator</h3>
+            <p class="card-desc">
+              Generate scientifically structured routines in seconds — Push/Pull/Legs, Upper/Lower, or Full Body splits tailored specifically to whether you train at home, in a commercial gym, or with bodyweight only.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="bento-card">
+          <div>
+            <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
+            <h3 class="card-title">Community & Real-time Chat</h3>
+            <p class="card-desc">
+              Share PRs, workout photos, and motivation on the social feed. Direct message your workout spotter with instant real-time chat.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="bento-card">
+          <div>
+            <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h3 class="card-title">Progress Tracking</h3>
+            <p class="card-desc">
+              Log daily workouts, track completed days, and monitor your consistency with automated progress saving.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="bento-card">
+          <div>
+            <div class="card-icon"><i class="fa-solid fa-shield-heart"></i></div>
+            <h3 class="card-title">No Ads. No Paywalls.</h3>
+            <p class="card-desc">
+              Every single workout plan, AI feature, and exercise is 100% unlocked for everyone. No subscriptions, no ads, no paywalls.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation Steps -->
+    <section class="steps-section">
+      <h2 class="section-title">How to Install in 3 Steps</h2>
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <h4>Download APK</h4>
+          <p>Tap the download button above to save the 41.5 MB APK file onto your Android device.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <h4>Allow & Install</h4>
+          <p>Open the downloaded file. If prompted, allow "Install from Unknown Sources" in settings.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <h4>Start Training</h4>
+          <p>Launch Spottr, personalize your fitness goals, and begin your first workout routine!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="cta-banner">
+      <h2>Ready to Crush Your Goals?</h2>
+      <p>Download Spottr now and start training with your personal AI coach and workout partners.</p>
+      <a href="spottr.apk" download="spottr.apk" class="btn-download">
+        <i class="fa-brands fa-android"></i> Download Spottr Free
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Spottr. 100% Free & Open Fitness Platform.</p>
+      <p style="margin-top: 6px; font-size: 12px;">Built with Flutter & Supabase.</p>
+    </footer>
+  </div>
+</body>
+</html>
