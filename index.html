@@ -32,7 +32,6 @@
       --primary: #B497FF;
       --primary-hover: #9b78f8;
       --primary-dark: #6e46e6;
-      --primary-glow: rgba(180, 151, 255, 0.25);
       --accent: #00E5FF;
       --text: #ffffff;
       --text-muted: #8e8ea0;
@@ -55,30 +54,6 @@
       display: flex;
       flex-direction: column;
       position: relative;
-    }
-
-    /* Background glow decorations */
-    .glow-circle-1 {
-      position: absolute;
-      top: -120px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(180, 151, 255, 0.18) 0%, rgba(9, 9, 11, 0) 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .glow-circle-2 {
-      position: absolute;
-      top: 60%;
-      right: -100px;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(9, 9, 11, 0) 70%);
-      pointer-events: none;
-      z-index: 0;
     }
 
     /* Container */
@@ -144,7 +119,6 @@
     .nav-btn:hover {
       background: var(--primary);
       color: #000;
-      box-shadow: 0 0 20px var(--primary-glow);
     }
 
     /* Hero Section */
@@ -153,24 +127,6 @@
       padding: 80px 0 50px;
       max-width: 850px;
       margin: 0 auto;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(180, 151, 255, 0.1);
-      border: 1px solid rgba(180, 151, 255, 0.25);
-      color: var(--primary);
-      padding: 6px 16px;
-      border-radius: 99px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 24px;
-    }
-
-    .badge i {
-      font-size: 11px;
     }
 
     h1 {
@@ -215,14 +171,12 @@
       font-size: 18px;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 10px 30px var(--primary-glow);
       transition: all 0.25s ease;
     }
 
     .btn-download:hover {
       background: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(180, 151, 255, 0.4);
     }
 
     .btn-download i {
@@ -438,9 +392,6 @@
   </style>
 </head>
 <body>
-  <div class="glow-circle-1"></div>
-  <div class="glow-circle-2"></div>
-
   <div class="container">
     <!-- Header -->
     <header>
@@ -455,9 +406,6 @@
 
     <!-- Hero -->
     <section class="hero">
-      <div class="badge">
-        <i class="fa-solid fa-bolt"></i> 100% Free • Standalone Release v1.0.1
-      </div>
       <h1>
         Train Smarter.<br>
         Find Your Spotter.<br>
